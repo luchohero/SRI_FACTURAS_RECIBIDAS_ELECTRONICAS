@@ -2,7 +2,9 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
-import os
+import csv
+import xlsxwriter
+
 def convertir_csv(ruta):
     with open(ruta, encoding='latin-1') as f:
         new = f.read().replace("\t",",")
@@ -10,7 +12,7 @@ def convertir_csv(ruta):
         new = new.replace(",,", ",")
         count = 1
         string_final = ""
-        #print(new)
+
         for r in new:
             if r == "\n":
                 if count % 2 != 0:
@@ -21,14 +23,37 @@ def convertir_csv(ruta):
             else:
                 string_final = string_final + r
         crear_csv(string_final)
-
+        crear_xls()
 def crear_csv(contenido):
-    file = open("file.csv", "w")
+    file = open("file_csv.csv", "w")
     file.write(contenido)
     file.close()
 
-def crear_xls(contenido):
-    pass
+def crear_xls():
+    with open('file_csv.csv', newline='') as File:
+        reader = csv.reader(File)
+        workbook = xlsxwriter.Workbook('file_xls.xlsx')
+        worksheet = workbook.add_worksheet()
+        index = 3
+
+        for row in reader:
+            worksheet.write('A' + str(index), row[0])
+            worksheet.write('B' + str(index), row[1])
+            worksheet.write('C' + str(index), row[2])
+            worksheet.write('D' + str(index), row[3])
+            worksheet.write('E' + str(index), row[4])
+            worksheet.write('F' + str(index), row[5])
+            worksheet.write('G' + str(index), row[6])
+            worksheet.write('H' + str(index), row[7])
+            worksheet.write('I' + str(index), row[8])
+            worksheet.write('J' + str(index), row[9])
+            worksheet.write('K' + str(index), row[10].replace(".", ","))
+            #print(row)
+            index+= 1
+
+        workbook.close()
+
+
 
 
 
