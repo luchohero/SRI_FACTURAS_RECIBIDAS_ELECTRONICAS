@@ -66,7 +66,8 @@ def select_file():
    Label(win, text=path, font=13).pack()
    convertir_csv(path)
 #Create a label and a Button to Open the dialog
-Label(win, text="SELECCIONAR EL ARCHIVO FORMATO .TXT", font=('Aerial 18 bold')).pack(pady=20)
+Label(win, text="SELECCIONAR EL ARCHIVO FORMATO .TXT", font=('Arial 18 bold')).pack(pady=20)
 button= ttk.Button(win, text="SELECCIONAR", command= select_file)
 button.pack(ipadx=5, pady=15)
 win.mainloop()
+
